@@ -112,6 +112,11 @@ val copyArtifacts by tasks.registering(Copy::class) {
 		include("**/*.jar")
 		rename("jadx-gui-(.*)-all.jar", "jadx-$1-all.jar")
 	}
+	// jadx-web: include launch scripts and shadow jar
+	from(tasks.getByPath(":jadx-web:installShadowDist")) {
+		include("**/bin/*")
+		include("**/lib/*")
+	}
 	from(layout.projectDirectory) {
 		include("README.md")
 		include("LICENSE")
